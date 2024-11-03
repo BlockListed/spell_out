@@ -4,12 +4,15 @@ import gleam/list
 import gleam/string
 
 /// Spells out the integer `i`.
-///
-/// Currently does not support negative integers.
 pub fn spell_out(i: Int) -> String {
-  let assert Ok(digits) = int.digits(i, 10)
+  case i < 0 {
+    True -> "minus" <> " " <> spell_out(-i)
+    False -> {
+      let assert Ok(digits) = int.digits(i, 10)
 
-  spell_out_digits(digits)
+      spell_out_digits(digits)
+    }
+  }
 }
 
 fn spell_out_digits(digits: List(Int)) -> String {
