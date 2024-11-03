@@ -7,10 +7,12 @@
 gleam add spell_out@1
 ```
 ```gleam
+import gleam/io
 import spell_out
 
 pub fn main() {
-  // TODO: An example of the project in use
+  io.println(spell_out.spell_out(123_456_789))
+  // one-hundred-twenty-three-million four-hundred-fifty-six-thousand seven-hundred-eigthy-nine
 }
 ```
 
