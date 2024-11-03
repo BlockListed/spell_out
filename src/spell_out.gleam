@@ -3,7 +3,8 @@ import gleam/iterator
 import gleam/list
 import gleam/string
 
-/// Spells out the number `i`.
+/// Spells out the integer `i`.
+///
 /// Currently does not support negative integers.
 pub fn spell_out(i: Int) -> String {
   let assert Ok(digits) = int.digits(i, 10)
