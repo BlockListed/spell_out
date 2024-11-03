@@ -1,7 +1,7 @@
-import gleam/string
 import gleam/int
 import gleam/iterator
 import gleam/list
+import gleam/string
 
 pub fn spell_out(i: Int) -> String {
   let assert Ok(digits) = int.digits(i, 10)
@@ -81,34 +81,31 @@ fn spell_out_digits(digits: List(Int)) -> String {
 
         case digits {
           [0, 0, 0] -> ""
-          digits -> 
-        case n {
-          0 -> spell_out_digits(digits)
-          n -> {
-            let short_scale = case n {
-              1 -> "thousand"
-              2 -> "million"
-              3 -> "billion"
-              4 -> "trillion"
-              5 -> "quadrillion"
-              6 -> "quintillion"
-              7 -> "sextillion"
-              8 -> "septillion"
-              9 -> "octillion"
-              10 -> "nonillion"
-              11 -> "decillion"
-              _ -> panic
+          digits ->
+            case n {
+              0 -> spell_out_digits(digits)
+              n -> {
+                let short_scale = case n {
+                  1 -> "thousand"
+                  2 -> "million"
+                  3 -> "billion"
+                  4 -> "trillion"
+                  5 -> "quadrillion"
+                  6 -> "quintillion"
+                  7 -> "sextillion"
+                  8 -> "septillion"
+                  9 -> "octillion"
+                  10 -> "nonillion"
+                  11 -> "decillion"
+                  _ -> panic
+                }
+
+                spell_out_digits(digits) <> "-" <> short_scale
+              }
             }
-
-            spell_out_digits(digits) <> "-" <> short_scale
-          }
         }
-        }
-
       })
-      |> iterator.fold("", fn(acc, d) {
-        d <> " " <> acc
-      })
+      |> iterator.fold("", fn(acc, d) { d <> " " <> acc })
       |> string.trim_right
     }
   }
