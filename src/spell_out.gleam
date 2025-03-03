@@ -1,5 +1,4 @@
 import gleam/int
-import gleam/iterator
 import gleam/list
 import gleam/string
 
@@ -80,11 +79,7 @@ fn spell_out_digits(digits: List(Int)) -> String {
 
       chunks
       |> list.reverse
-      |> iterator.from_list
-      |> iterator.index
-      |> iterator.map(fn(e) {
-        let #(digits, n) = e
-
+      |> list.index_map(fn(digits, n) {
         case digits {
           [0, 0, 0] -> ""
           digits ->
@@ -111,8 +106,8 @@ fn spell_out_digits(digits: List(Int)) -> String {
             }
         }
       })
-      |> iterator.fold("", fn(acc, d) { d <> " " <> acc })
-      |> string.trim_right
+      |> list.fold("", fn(acc, d) { d <> " " <> acc })
+      |> string.trim_end
     }
   }
 }
